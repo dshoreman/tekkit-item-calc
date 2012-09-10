@@ -21,7 +21,7 @@
 			<div id="inventory">
 				<div class="well">
 					<ul id="stage"></ul>
-					{{ Buttons::large_disabled_block_primary_normal('Calculate') }}
+					{{ Buttons::large_disabled_block_primary_normal('Calculate', array('id' => 'calculate')) }}
 				</div>
 			</div>
 		</div>
@@ -47,7 +47,6 @@
 				{
 					$('#inventory .well button').prop('disabled', false).removeClass('disabled');
 				}
-				else alert('f');
 			},
 			revert: true,
 		});
