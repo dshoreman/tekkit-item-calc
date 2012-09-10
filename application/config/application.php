@@ -2,6 +2,8 @@
 
 return array(
 
+	'name' => 'Tekkit Item Calculator',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -212,6 +214,11 @@ return array(
 		'SplitDropdownButton'   => 'Bootstrapper\\SplitDropdownButton',
 		'Tabbable'              => 'Bootstrapper\\Tabbable',
 		'Typeahead'             => 'Bootstrapper\\Typeahead',
+
+		// Verify Models
+		'User'       => 'Verify\\Models\\User',
+		'Role'       => 'Verify\\Models\\Role',
+		'Permission' => 'Verify\\Models\\Permission',
 	),
 
 );
