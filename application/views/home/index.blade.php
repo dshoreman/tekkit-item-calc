@@ -21,6 +21,7 @@
 			<div id="inventory">
 				<div class="well">
 					<ul id="stage"></ul>
+					{{ Buttons::large_disabled_block_primary_normal('Calculate') }}
 				</div>
 			</div>
 		</div>
@@ -40,6 +41,14 @@
 	{
 		$('#stage').sortable({
 			placeholder: 'info well',
+			receive: function(e, ui)
+			{
+				if ($('li', '#stage').length === 1)
+				{
+					$('#inventory .well button').prop('disabled', false).removeClass('disabled');
+				}
+				else alert('f');
+			},
 			revert: true,
 		});
 		$('#items .well').draggable({
