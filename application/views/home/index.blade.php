@@ -10,7 +10,7 @@
 		<ul>
 			@foreach ($items as $item)
 				<li class="well">
-					<img src="{{ $url($item->alias?:$item->name) }}" title="{{ $item->name }}" />
+					<img src="{{ $item->image_url?:$url($item->alias?:$item->name) }}" title="{{ $item->name }}" />
 					<span>{{ $item->name }}</span>
 				</li>
 			@endforeach
@@ -58,6 +58,6 @@
 		$('#stage, #items').disableSelection();
 
 		$('#items .well img').tooltip();
-	})
+	});
 </script>
 @endsection

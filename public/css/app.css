@@ -26,3 +26,9 @@
 	margin: 5px;
 	padding: 8px;
 }
+
+#items .well img,
+#stage .well img
+{
+	width: 32px;
+}
