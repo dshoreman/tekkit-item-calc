@@ -36,7 +36,7 @@ Route::get('/', function()
 {
 	return View::make('home.index')->with(array(
 		'topmenu' => Config::get('menu.admin'),
-		'items' => Item::all(),
+		'items' => Item::where('is_craftable', '=', '1')->get(),
 		'url' => function ($name, $size = 32)
 		{
 			$name = strtolower(str_replace(array(' ', '(', ')', ':'), '', $name));
