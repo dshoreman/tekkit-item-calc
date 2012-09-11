@@ -37,13 +37,7 @@ Route::get('/', function()
 	return View::make('home.index')->with(array(
 		'topmenu' => Config::get('menu.admin'),
 		'items' => Item::all(),
-		'imgadded' => array(),
-		'imgdir' => scandir(path('public').'img/items'),
-		'imgactual' => count(scandir(path('public').'img/items')),
-		'imgcount' => 0,
-		'imgfailcount' => 0,
-		'k' => 0,
-		'url' => function ($name, $size = 32)//, &$added, &$imgdir, &$imgcount, &$imgfailcount, $size = 32)
+		'url' => function ($name, $size = 32)
 		{
 			$name = strtolower(str_replace(array(' ', '(', ')', ':'), '', $name));
 			$path = 'img/items/'.$name.'_icon'.$size.'.png';
@@ -51,11 +45,8 @@ Route::get('/', function()
 			if (file_exists(path('public') . $path))
 			{
 				$path = asset($path);
-				//$added[] = $name.'_icon'.$size.'.png';
-				//$imgcount++;
 				return $path;
 			}
-			//$imgfailcount++;
 			return asset('img/items/unknown_icon32.png');
 		},
 	));
