@@ -9,7 +9,7 @@
 	<div class="span5" id="items">
 		<ul>
 			@foreach ($items as $item)
-				<li class="well">
+				<li class="well" data-id="{{ $item->id }}">
 					<img src="{{ $item->image_url?:$url($item->alias?:$item->name) }}" title="{{ $item->name }}" />
 					<span>{{ $item->name }}</span>
 				</li>
@@ -27,7 +27,9 @@
 		</div>
 		<div class="row">
 			<div id="result">
-				<div class="well"></div>
+				<div class="well">
+					<p class="lead">Ingredients will show here when you've<br/>dragged something to the stage</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -58,6 +60,34 @@
 		$('#stage, #items').disableSelection();
 
 		$('#items .well img').tooltip();
+
+		$('#calculate').click(function()
+		{
+			var id_array = new Array();
+			$('#stage li').each(function(i, el)
+			{
+				id_array.push($(this).data('id'));
+			})
+			$.ajax({
+				data: {
+					recipes : id_array
+				},
+				type: 'POST',
+				url: '{{ URL::to('ajax/calculate') }}',
+				success: function(data)
+				{
+					var html = '';
+					data = $.parseJSON(data);
+
+					$(data).each(function(k, a)
+					{
+						html += '<li><img src="'+a.image_url+'" title="'+a.name+'" /><span>'+a.count+'</span></li>';
+					});
+
+					$('#result .well').html('<ul>'+html+'</ul>');
+				}
+			});
+		});
 	});
 </script>
 @endsection

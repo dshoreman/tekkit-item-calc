@@ -52,6 +52,11 @@ Route::get('/', function()
 	));
 });
 
+Route::post('ajax/calculate', function()
+{
+	return json_encode(Recipe::get_combined_totals(Input::get('recipes')));
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
