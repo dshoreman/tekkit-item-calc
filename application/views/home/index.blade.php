@@ -18,18 +18,16 @@
 	</div>
 	<div class="span7">
 		<div class="row">
-			<div id="inventory">
-				<div class="well">
-					<ul id="stage"></ul>
-					{{ Buttons::large_disabled_block_primary_normal('Calculate', array('id' => 'calculate')) }}
-				</div>
+			<div class="well" id="stage">
+				<ul></ul>
+				{{ Buttons::large_disabled_block_primary_normal('Calculate', array('id' => 'calculate')) }}
 			</div>
 		</div>
 		<div class="row">
 			<div id="result">
-				<div class="well">
-					<p class="lead">Ingredients will show here when you've<br/>dragged something to the stage</p>
-				</div>
+				<ul>
+					<li class="lead">Ingredients will show here when you've dragged something to the stage</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -41,19 +39,19 @@
 <script type="text/javascript">
 	$(document).ready(function()
 	{
-		$('#stage').sortable({
-			placeholder: 'info well',
+		$('#stage ul').sortable({
+			placeholder: 'well',
 			receive: function(e, ui)
 			{
-				if ($('li', '#stage').length === 1)
+				if ($('li', '#stage ul').length === 1)
 				{
-					$('#inventory .well button').prop('disabled', false).removeClass('disabled');
+					$('#stage button').removeClass('disabled');
 				}
 			},
 			revert: true,
 		});
 		$('#items .well').draggable({
-			connectToSortable: '#stage',
+			connectToSortable: '#stage ul',
 			helper: 'clone',
 			revert: 'invalid',
 		});
@@ -63,6 +61,11 @@
 
 		$('#calculate').click(function()
 		{
+			if ($(this).hasClass('disabled'))
+			{
+				return false;
+			}
+
 			var id_array = new Array();
 			$('#stage li').each(function(i, el)
 			{
@@ -81,10 +84,10 @@
 
 					$(data).each(function(k, a)
 					{
-						html += '<li><img src="'+a.image_url+'" title="'+a.name+'" /><span>'+a.count+'</span></li>';
+						html += '<li class="well"><img src="'+a.image_url+'" title="'+a.name+'" /><span>'+a.count+'</span></li>';
 					});
 
-					$('#result .well').html('<ul>'+html+'</ul>');
+					$('#result ul').html(html);
 				}
 			});
 		});

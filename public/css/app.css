@@ -1,5 +1,5 @@
 #items ul
-,#stage
+,#stage ul
 ,#result ul
 {
 	margin: 0;
@@ -17,7 +17,7 @@
 	display: none;
 }
 
-#stage
+#stage ul
 {
 	min-height: 192px;
 }
@@ -28,8 +28,8 @@
 	padding: 8px;
 }
 
-#items .well img,
-#stage .well img
+#items .well img
+,#stage img
 ,#result .well img
 {
 	width: 32px;
